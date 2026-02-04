@@ -1,4 +1,4 @@
-public class Sorter<T extends comparable<T>> {
+public class Sorter<T extends Comparable<T>> {
     public T[] GnomeSort(T[] input) {
         return input;
     }
@@ -20,7 +20,7 @@ public class Sorter<T extends comparable<T>> {
             int min_id = i;
             
             for (int j = i + 1; j < input.length; j++) {
-                if (input[j].compareTo(input[min_id]) < -1) {
+                if (input[j].compareTo(input[min_id]) < 0) {
                     min_id = j;
                 }
             }
