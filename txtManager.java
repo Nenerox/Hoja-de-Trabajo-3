@@ -1,7 +1,10 @@
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Random;
 /**
  * Clase utilitaria para la lectura y escritura de archivos de texto.
  *
@@ -45,6 +48,22 @@ public class txtManager {
             );
         } catch (IOException e) {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+
+    public void generarNumeros(int cantidad, String nombreArchivo, Random random)
+    {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
+            for (int i = 0; i < cantidad; i++) {
+                int numero = random.nextInt();
+                writer.print(numero);
+                if(i < cantidad - 1)
+                {
+                    writer.print(" ");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al crear el archivo: " + e.getMessage());
         }
     }
 }
