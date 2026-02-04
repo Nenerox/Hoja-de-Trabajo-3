@@ -39,7 +39,7 @@ public class txtManager {
         try {
             Files.writeString(
                 Path.of(filePath),
-                java.util.Arrays.toString(result) + "\n",
+                java.util.Arrays.toString(result) + " ",
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING
             );
