@@ -17,10 +17,10 @@ public class txtManager {
      * Lee el contenido de un archivo y lo separa por espacios.
      * @param filePath ruta del archivo a leer
      */
-    public int[] getArray(String filePath) {
+    public Integer[] getArray(String filePath) {
     try {
         String[] stringArray = Files.readString(Path.of(filePath)).trim().split(" ");
-        int[] intArray = new int[stringArray.length];
+        Integer[] intArray = new Integer[stringArray.length];
         for (int i = 0; i < stringArray.length; i++) {
             intArray[i] = Integer.parseInt(stringArray[i]);
         }
@@ -28,7 +28,7 @@ public class txtManager {
 
     } catch (IOException e) {
         System.err.println("Error al leer el archivo: " + e.getMessage());
-        return new int[0];
+        return new Integer[0];
     }
 }
 
@@ -38,7 +38,7 @@ public class txtManager {
      * @param filePath ruta del archivo de salida
      * @param result resultado a escribir
      */
-    public void writeResult(String filePath, int[] result) {
+    public void writeResult(String filePath, Integer[] result) {
         try {
             Files.writeString(
                 Path.of(filePath),
