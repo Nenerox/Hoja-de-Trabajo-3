@@ -156,6 +156,10 @@ public class Sorter<T extends Number & Comparable<T>> {
     }
 
     public T[] SeleccionSort(T[] input) {
+        if (input.length == 0) {
+            return input;
+        }
+        
         for (int i = 0; i < input.length; i++) {
             int minIndex = i;
             
