@@ -15,32 +15,32 @@ public class Main {
 
         //GnomeSort TEST unsorted and sorted
         System.out.println("Sorteando con GnomeSort");
-        txtManager.writeResult("Sorted.txt", sorter.GnomeSort(arrayToSort));
-        Integer[] SortedArray = txtManager.getArray("Sorted.txt");
+        Integer[] SortedArray = sorter.GnomeSort(arrayToSort);
+        txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.GnomeSort(SortedArray);
 
         //MergeSort TEST unsorted and sorted
         System.out.println("Sorteando con MergeSort");
-        txtManager.writeResult("Sorted.txt", sorter.MergeSort(arrayToSort));
-        SortedArray = txtManager.getArray("Sorted.txt");
+        SortedArray = sorter.MergeSort(arrayToSort);
+        txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.MergeSort(SortedArray);
 
         //QuickSort TEST unsorted and sorted
         System.out.println("Sorteando con QuickSort");
-        txtManager.writeResult("Sorted.txt", sorter.QuickSort(arrayToSort));
-        SortedArray = txtManager.getArray("Sorted.txt");
+        SortedArray = sorter.QuickSort(arrayToSort);
+        txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.QuickSort(SortedArray);
 
         //RadixSort TEST unsorted and sorted
         System.out.println("Sorteando con RadixSort");
-        txtManager.writeResult("Sorted.txt", sorter.radixSort(arrayToSort));
-        SortedArray = txtManager.getArray("Sorted.txt");
+        SortedArray = sorter.radixSort(arrayToSort);
+        txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.radixSort(SortedArray);
 
         //SeleccionSort TEST unsorted and sorted
         System.out.println("Sorteando con SeleccionSort");
-        txtManager.writeResult("Sorted.txt", sorter.SeleccionSort(arrayToSort));
-        SortedArray = txtManager.getArray("Sorted.txt");
+        SortedArray = sorter.SeleccionSort(arrayToSort);
+        txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.SeleccionSort(SortedArray);
 
         System.out.println("Sorteo Terminado");
