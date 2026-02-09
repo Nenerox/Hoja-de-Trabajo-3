@@ -13,7 +13,7 @@ public class Main {
         txtManager.generarNumeros(cantidadNumeros, nombreArchivo, random);
         Integer[] arrayToSort = txtManager.getArray("Prueba.txt");
         
-        txtManager.writeResult("Sorted.txt", sorter.radixSort(arrayToSort));
+        txtManager.writeResult("Sorted.txt", sorter.MergeSort(arrayToSort));
         
     }
 }

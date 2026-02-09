@@ -2,6 +2,9 @@ import java.util.Arrays;
 
 public class Sorter<T extends Number & Comparable<T>> {
     public T[] GnomeSort(T[] input) {
+        if (input.length == 0) {
+            return input;
+        }        
         int index = 0;
         while (index < input.length) {
             if (index == 0 || input[index].compareTo(input[index - 1]) >= 0) {
@@ -17,9 +20,12 @@ public class Sorter<T extends Number & Comparable<T>> {
         return input;
     }
     public T[] MergeSort(T[] input) {
+        if (input.length == 0) {
+            return input;
+        }
+
         if (input.length <= 1) return input;
-        @SuppressWarnings("unchecked")
-        T[] aux = (T[]) new Comparable[input.length];
+        T[] aux = Arrays.copyOf(input, input.length);
         mergeSort(input, aux, 0, input.length - 1);
         return input;
     }
@@ -50,6 +56,10 @@ public class Sorter<T extends Number & Comparable<T>> {
     }
 
     public T[] QuickSort(T[] input) {
+        if (input.length == 0) {
+            return input;
+        }
+
         quickSort(input, 0, input.length - 1);
         return input;
     }
