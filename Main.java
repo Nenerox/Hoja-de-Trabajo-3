@@ -13,33 +13,33 @@ public class Main {
          
         Integer[] arrayToSort = txtManager.getArray("Unsorted.txt");
 
-        //GnomeSort TEST unsorted and sorted
+        //GnomeSort TEST for unsorted and sorted
         System.out.println("Sorteando con GnomeSort");
-        Integer[] SortedArray = sorter.GnomeSort(arrayToSort);
+        Integer[] SortedArray = sorter.GnomeSort(arrayToSort.clone());
         txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.GnomeSort(SortedArray);
 
-        //MergeSort TEST unsorted and sorted
+        //MergeSort TEST for unsorted and sorted
         System.out.println("Sorteando con MergeSort");
-        SortedArray = sorter.MergeSort(arrayToSort);
+        SortedArray = sorter.MergeSort(arrayToSort.clone());
         txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.MergeSort(SortedArray);
 
-        //QuickSort TEST unsorted and sorted
+        //QuickSort TEST for unsorted and sorted
         System.out.println("Sorteando con QuickSort");
-        SortedArray = sorter.QuickSort(arrayToSort);
+        SortedArray = sorter.QuickSort(arrayToSort.clone());
         txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.QuickSort(SortedArray);
 
-        //RadixSort TEST unsorted and sorted
+        //RadixSort TEST for unsorted and sorted
         System.out.println("Sorteando con RadixSort");
-        SortedArray = sorter.radixSort(arrayToSort);
+        SortedArray = sorter.radixSort(arrayToSort.clone());
         txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.radixSort(SortedArray);
 
-        //SeleccionSort TEST unsorted and sorted
+        //SeleccionSort TEST for unsorted and sorted
         System.out.println("Sorteando con SeleccionSort");
-        SortedArray = sorter.SeleccionSort(arrayToSort);
+        SortedArray = sorter.SeleccionSort(arrayToSort.clone());
         txtManager.writeResult("Sorted.txt", SortedArray);
         sorter.SeleccionSort(SortedArray);
 
