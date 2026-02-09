@@ -2,17 +2,83 @@ import java.util.Arrays;
 
 public class Sorter<T extends Number & Comparable<T>> {
     public T[] GnomeSort(T[] input) {
+        int index = 0;
+        while (index < input.length) {
+            if (index == 0 || input[index].compareTo(input[index - 1]) >= 0) {
+                index++;
+            } else {
+                // Intercambiar elementos
+                T temp = input[index];
+                input[index] = input[index - 1];
+                input[index - 1] = temp;
+                index--;
+            }
+        }
         return input;
     }
-
     public T[] MergeSort(T[] input) {
+        if (input.length <= 1) return input;
+        @SuppressWarnings("unchecked")
+        T[] aux = (T[]) new Comparable[input.length];
+        mergeSort(input, aux, 0, input.length - 1);
         return input;
+    }
+    private void mergeSort(T[] arr, T[] aux, int left, int right) {
+        if (left >= right) return;
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, aux, left, mid);
+        mergeSort(arr, aux, mid + 1, right);
+        merge(arr, aux, left, mid, right);
+    }
+    private void merge(T[] arr, T[] aux, int left, int mid, int right) {
+        for (int i = left; i <= right; i++) {
+            aux[i] = arr[i];
+        }
+        int i = left;
+        int j = mid + 1;
+        int k = left;
+        while (i <= mid && j <= right) {
+            if (aux[i].compareTo(aux[j]) <= 0) {
+                arr[k++] = aux[i++];
+            } else {
+                arr[k++] = aux[j++];
+            }
+        }
+        while (i <= mid) {
+            arr[k++] = aux[i++];
+        }
     }
 
     public T[] QuickSort(T[] input) {
+        quickSort(input, 0, input.length - 1);
         return input;
     }
+    private void quickSort(T[] arr, int low, int high) {
+        if (low < high) {
+            int p = partition(arr, low, high);
+            quickSort(arr, low, p - 1);
+            quickSort(arr, p + 1, high);
+        }
+    }
+    private int partition(T[] arr, int low, int high) {
+        T pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j].compareTo(pivot) <= 0) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+    private void swap(T[] arr, int i, int j) {
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 
+    
     public T[] radixSort(T[] input) {
         if (input.length == 0) {
             return input;
@@ -74,25 +140,20 @@ public class Sorter<T extends Number & Comparable<T>> {
     }
 
     public T[] SeleccionSort(T[] input) {
-        if (input.length == 0) {
-            return input;
-        }
-
         for (int i = 0; i < input.length; i++) {
             int minIndex = i;
             
-            //Buscar el minimo en el arreglo no ordenado y colocarlo al inicio
+            // Buscar el mínimo en arreglo no ordenado y colocarlo al inicio
             for (int j = i + 1; j < input.length; j++) {
                 if (input[j].compareTo(input[minIndex]) < 0) {
                     minIndex = j;
                 }
             }
-
+            
             T aux = input[i];
             input[i] = input[minIndex];
             input[minIndex] = aux;
         }
-        return input;  
+        return input;
     }
-
 }
