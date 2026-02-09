@@ -20,78 +20,70 @@ public class Sorter<T extends Number & Comparable<T>> {
         return input;
     }
     public T[] MergeSort(T[] input) {
-        if (input.length == 0) {
-            return input;
-        }
-
-        if (input.length <= 1) return input;
-        T[] aux = Arrays.copyOf(input, input.length);
-        sort(input, aux, 0, input.length - 1);
-        return input;
-    }
-    //El codigo se separa en metodos privados para ejecutarlo más facil
-    private void sort(T[] arr, T[] aux, int left, int right) {
-        //Este metodo divide el input en dos, ordena la parte izquierda y la parte derecha, y luego
-        // los hace merge llamando a otro metodo privado
-        if (left >= right) return;
-        int mid = left + (right - left) / 2;
-        sort(arr, aux, left, mid);
-        sort(arr, aux, mid + 1, right);
-        merge(arr, aux, left, mid, right);
-    }
-    //este metodo privado hace merge los lados izquierdo y derecho ya ordenados
-    private void merge(T[] arr, T[] aux, int left, int mid, int right) {
-        for (int i = left; i <= right; i++) {
-            aux[i] = arr[i];
-        }
-        int i = left;
-        int j = mid + 1;
-        int k = left;
-        while (i <= mid && j <= right) {
-            if (aux[i].compareTo(aux[j]) <= 0) {
-                arr[k++] = aux[i++];
-            } else {
-                arr[k++] = aux[j++];
+        int n = input.length;
+        if (n <= 1) return input;
+        T[] aux = Arrays.copyOf(input, n);
+        for (int size = 1; size < n; size *= 2) {
+            for (int left = 0; left < n - size; left += 2 * size) {
+                int mid = left + size - 1;
+                int right = Math.min(left + 2 * size - 1, n - 1);
+                for (int i = left; i <= right; i++) {
+                    aux[i] = input[i];
+                }
+                int i = left;
+                int j = mid + 1;
+                int k = left;
+                while (i <= mid && j <= right) {
+                    if (aux[i].compareTo(aux[j]) <= 0) {
+                        input[k++] = aux[i++];
+                    } else {
+                        input[k++] = aux[j++];
+                    }
+                }
+                while (i <= mid) {
+                    input[k++] = aux[i++];
+                }
             }
         }
-        while (i <= mid) {
-            arr[k++] = aux[i++];
-        }
-    }
-
-    public T[] QuickSort(T[] input) {
-        if (input.length == 0) {
-            return input;
-        }
-
-        quickSort(input, 0, input.length - 1);
         return input;
     }
-    //Este metodo divide el input usando un pivote, y lo va ordenando recursivamente, usa el otro método
-    //privado para dividirlo y el metodo swap para ir intercambiando los valores recursivamente
-    private void quickSort(T[] arr, int low, int high) {
-        if (low < high) {
-            int p = partition(arr, low, high);
-            quickSort(arr, low, p - 1);
-            quickSort(arr, p + 1, high);
-        }
-    }
-    private int partition(T[] arr, int low, int high) {
-        T pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j].compareTo(pivot) <= 0) {
-                i++;
-                swap(arr, i, j);
+
+    public T[] QuickSort(T[] arr) {
+        int n = arr.length;
+        if (n <= 1) return arr;
+
+        int[] stack = new int[n * 2];
+        int top = -1;
+        stack[++top] = 0;
+        stack[++top] = n - 1;
+        while (top >= 0) {
+            int high = stack[top--];
+            int low = stack[top--];
+            T pivot = arr[high];
+            int i = low - 1;
+            for (int j = low; j < high; j++) {
+                if (arr[j].compareTo(pivot) <= 0) {
+                    i++;
+                    T temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+            T temp = arr[i + 1];
+            arr[i + 1] = arr[high];
+            arr[high] = temp;
+
+            int p = i + 1;
+            if (p - 1 > low) {
+                stack[++top] = low;
+                stack[++top] = p - 1;
+            }
+            if (p + 1 < high) {
+                stack[++top] = p + 1;
+                stack[++top] = high;
             }
         }
-        swap(arr, i + 1, high);
-        return i + 1;
-    }
-    private void swap(T[] arr, int i, int j) {
-        T temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        return arr;
     }
 
     
