@@ -26,16 +26,20 @@ public class Sorter<T extends Number & Comparable<T>> {
 
         if (input.length <= 1) return input;
         T[] aux = Arrays.copyOf(input, input.length);
-        mergeSort(input, aux, 0, input.length - 1);
+        sort(input, aux, 0, input.length - 1);
         return input;
     }
-    private void mergeSort(T[] arr, T[] aux, int left, int right) {
+    //El codigo se separa en metodos privados para ejecutarlo más facil
+    private void sort(T[] arr, T[] aux, int left, int right) {
+        //Este metodo divide el input en dos, ordena la parte izquierda y la parte derecha, y luego
+        // los hace merge llamando a otro metodo privado
         if (left >= right) return;
         int mid = left + (right - left) / 2;
-        mergeSort(arr, aux, left, mid);
-        mergeSort(arr, aux, mid + 1, right);
+        sort(arr, aux, left, mid);
+        sort(arr, aux, mid + 1, right);
         merge(arr, aux, left, mid, right);
     }
+    //este metodo privado hace merge los lados izquierdo y derecho ya ordenados
     private void merge(T[] arr, T[] aux, int left, int mid, int right) {
         for (int i = left; i <= right; i++) {
             aux[i] = arr[i];
@@ -63,6 +67,8 @@ public class Sorter<T extends Number & Comparable<T>> {
         quickSort(input, 0, input.length - 1);
         return input;
     }
+    //Este metodo divide el input usando un pivote, y lo va ordenando recursivamente, usa el otro método
+    //privado para dividirlo y el metodo swap para ir intercambiando los valores recursivamente
     private void quickSort(T[] arr, int low, int high) {
         if (low < high) {
             int p = partition(arr, low, high);
